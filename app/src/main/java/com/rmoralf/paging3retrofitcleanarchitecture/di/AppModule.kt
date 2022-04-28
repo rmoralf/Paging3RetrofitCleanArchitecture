@@ -3,6 +3,7 @@ package com.rmoralf.paging3retrofitcleanarchitecture.di
 import com.rmoralf.paging3retrofitcleanarchitecture.core.utils.Constants.API_ENDPOINT
 import com.rmoralf.paging3retrofitcleanarchitecture.data.network.remote.ImagesService
 import com.rmoralf.paging3retrofitcleanarchitecture.data.repository.ImageRepositoryImpl
+import com.rmoralf.paging3retrofitcleanarchitecture.data.repository.RetrofitPagingSource
 import com.rmoralf.paging3retrofitcleanarchitecture.domain.repository.ImageRepository
 import com.rmoralf.paging3retrofitcleanarchitecture.domain.usecases.GetImages
 import com.rmoralf.paging3retrofitcleanarchitecture.domain.usecases.UseCases
@@ -24,12 +25,17 @@ object AppModule {
 
     @Provides
     fun providesImageRepository(
-        imagesService: ImagesService
-    ): ImageRepository = ImageRepositoryImpl(imagesService)
+        retrofitPagingSource: RetrofitPagingSource
+    ): ImageRepository = ImageRepositoryImpl(retrofitPagingSource)
 
     @Provides
     fun provideImagesService(restClient: Retrofit): ImagesService =
         restClient.create()
+
+    @Provides
+    fun provideRetrofitPagingSource(
+        imagesService: ImagesService
+    ) = RetrofitPagingSource(imagesService)
 
     @Provides
     fun providesUseCases(

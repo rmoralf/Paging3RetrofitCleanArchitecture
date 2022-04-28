@@ -5,5 +5,5 @@ import com.rmoralf.paging3retrofitcleanarchitecture.domain.repository.ImageRepos
 class GetImages(
     private val repository: ImageRepository
 ) {
-    suspend operator fun invoke() = repository.getImages()
+    operator fun invoke() = repository.getImages()
 }

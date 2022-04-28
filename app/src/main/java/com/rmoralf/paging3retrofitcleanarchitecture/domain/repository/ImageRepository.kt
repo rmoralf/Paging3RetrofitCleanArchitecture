@@ -1,9 +1,9 @@
 package com.rmoralf.paging3retrofitcleanarchitecture.domain.repository
 
+import androidx.paging.PagingData
 import com.rmoralf.paging3retrofitcleanarchitecture.domain.model.Image
-import com.rmoralf.paging3retrofitcleanarchitecture.domain.model.Response
 import kotlinx.coroutines.flow.Flow
 
 interface ImageRepository {
-    suspend fun getImages(): Flow<Response<List<Image>>>
+    fun getImages(): Flow<PagingData<Image>>
 }

@@ -6,17 +6,18 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.LazyVerticalGrid
-import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.paging.compose.LazyPagingItems
+import com.rmoralf.paging3retrofitcleanarchitecture.core.utils.items
 import com.rmoralf.paging3retrofitcleanarchitecture.domain.model.Image
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun GalleryGrid(
-    imageList: List<Image>
+    imageList: LazyPagingItems<Image>
 ) {
     LazyVerticalGrid(
         cells = GridCells.Adaptive(128.dp),
@@ -32,7 +33,9 @@ fun GalleryGrid(
             .background(Color.White)
     ) {
         items(imageList) { image ->
-            GalleryGridItem(image)
+            image?.let {
+                GalleryGridItem(it)
+            }
         }
     }
 }
